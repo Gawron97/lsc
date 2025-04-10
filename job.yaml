@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-index
+spec:
+  template:
+    spec:
+      containers:
+        - name: copy
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              echo '<!DOCTYPE html><html><head><title>Hello</title></head>
+              <body><h1>Strona testowa z Job</h1></body></html>' > /mnt/data/index.html;
+          volumeMounts:
+            - name: html
+              mountPath: /mnt/data
+      restartPolicy: OnFailure
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: web-pvc

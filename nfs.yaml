@@ -1,0 +1,10 @@
+nfs:
+  server: 10.100.140.223
+  path: /
+
+storageClass:
+  name: nfs-client
+  defaultClass: true
+
+nodeSelector:
+  kubernetes.io/hostname: ip-172-31-44-122.ec2.internal
